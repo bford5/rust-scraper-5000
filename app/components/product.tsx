@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { ProductType } from "@/Types/productType";
+import { ProductType } from "@/Types/ProductType";
 
 import formatPrice from "@/utils/PriceFormatter";
 
