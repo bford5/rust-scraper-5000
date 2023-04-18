@@ -2,6 +2,8 @@ import Stripe from "stripe"
 
 import Product from "./components/product"
 
+import ProductGrid from "./components/productGrid"
+
 const getProducts = async () => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
     apiVersion: "2022-11-15",
@@ -34,7 +36,7 @@ export default async function Home() {
   return (
     <main className="">
       <p className="">Home Page</p>
-      {products.map((product) => <Product {...product} />)}
+      <ProductGrid>{products.map((product) => <Product {...product} key={product.id} />)}</ProductGrid>
     </main>
   )
 }
