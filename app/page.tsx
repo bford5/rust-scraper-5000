@@ -34,7 +34,7 @@ export default async function Home() {
   return (
     <main className="">
       <p className="">Home Page</p>
-      {products.map((product) => <Product productData={product} />)}
+      {products.map((product) => <Product {...product} />)}
     </main>
   )
 }
