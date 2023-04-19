@@ -14,13 +14,14 @@ const getProducts = async () => {
   const productWithPrices = await Promise.all(
     products.data.map(async (product) => {
       const prices = await stripe.prices.list({product: product.id})
+      const features = product.metadata.features || "" // EXTRACT metadata value from DB field "metadata", field value is called features when console.log
       return {
         id: product.id,
         name: product.name,
-        price: prices.data[0].unit_amount,
+        unit_amount: prices.data[0].unit_amount,
         image: product.images[0],
         currency: prices.data[0].currency,
-        metadata: product.metadata.features,
+        metadata: {features},
         description: product.description,
       }
     })
@@ -34,7 +35,7 @@ export default async function Home() {
   const products = await getProducts();
   // console.log(products);
   return (
-    <main className="">
+    <main>
       <p className="">Home Page</p>
       <ProductGrid>{products.map((product) => <Product {...product} key={product.id} />)}</ProductGrid>
     </main>

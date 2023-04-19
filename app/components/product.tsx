@@ -5,8 +5,8 @@ import { ProductType } from "@/Types/ProductType";
 
 import formatPrice from "@/utils/PriceFormatter";
 
-export default function Product({id, name, description, image, metadata, price}:  ProductType) {
-    
+export default function Product({id, name, description, image, metadata, unit_amount}:  ProductType) {
+    const {features} = metadata;
     const productLink = {
         pathname: `/product/${id}`,
         query: {
@@ -14,8 +14,8 @@ export default function Product({id, name, description, image, metadata, price}:
             name,
             description,
             image,
-            metadata,
-            price
+            features,
+            unit_amount
         }
     }
     
@@ -25,7 +25,7 @@ export default function Product({id, name, description, image, metadata, price}:
             <div className="flex justify-center rounded-sm"><Image src={image} alt={name} width={300} height={300} className=" rounded-2xl w-80 h-52 md:w-full md:h-64 object-cover" /></div>
             <div className=" flex flex-row justify-between bg-slate-300 rounded-md p-1 mt-2">
                 <h2>{name}</h2>
-                <h3 className=" font-medium">{price !== null ? formatPrice(price) : 'N/A'}</h3>
+                <h3 className=" font-medium">{unit_amount !== null ? formatPrice(unit_amount) : 'N/A'}</h3>
             </div>
             <p className="p-4">{description}</p>
         </div>
