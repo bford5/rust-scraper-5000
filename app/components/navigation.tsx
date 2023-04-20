@@ -22,7 +22,7 @@ export default function Navigation({user}: Session) {
             <div className="menu flex flex-row gap-1">
                 <Link className="p-2 hover:text-slate-800 hover:underline ease-in-out duration-700 transition-all" href={`/`}>Homepage</Link>
                 <Link className="p-2 hover:text-slate-800 hover:underline ease-in-out duration-700 transition-all" href={`/about`}>About</Link>
-                <div className="p-4 bg-teal-500 text-white rounded-md hover:bg-teal-700 hover:text-slate-300 transition text-xl cursor-pointer relative">
+                <div onClick={cartStore.toggleCart} className="p-4 bg-teal-500 text-white rounded-md hover:bg-teal-700 hover:text-slate-300 transition text-xl cursor-pointer relative">
                     <FaShoppingCart />
                     {cartStore.cart.length >= 0 && <span className=" absolute text-sm bg-red-500 text-white rounded-full px-0.5 py-0.5 top-0 right-0 flex justify-center">{cartStore.cart.length}</span>}
                 </div>

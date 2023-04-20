@@ -12,6 +12,7 @@ export default function Cart() {
 
     return (
         <>
+        <h2>CART MODAL</h2>
             {/* <button className="p-2 bg-yellow-500 text-white rounded-md" onClick={toggleCart}>Cart</button> */}
             {/* {cartStore.isOpen && <CartModal />} */}
         </>

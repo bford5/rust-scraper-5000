@@ -3,6 +3,8 @@ import './globals.css'
 import {getServerSession} from 'next-auth/next'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
+import Hydrate from '@/utils/Hydrate'
+
 import Navigation from './components/navigation'
 
 export const metadata = {
@@ -21,9 +23,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* having ? on session below stops trying to access .user IF session returns null */}
-        <Navigation user={session?.user} expires={session?.expires as string}/>
-        {children}
+        <Hydrate>
+          {/* having ? on session below stops trying to access .user IF session returns null */}
+          <Navigation user={session?.user} expires={session?.expires as string}/>
+          {children}
+        </Hydrate>
       </body>
     </html>
   )
