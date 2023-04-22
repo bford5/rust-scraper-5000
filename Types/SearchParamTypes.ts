@@ -9,6 +9,7 @@ type SearchParams = {
     description: string,
     image: string,
     features: string,
+    quantity: number | 1
 }
 
 
