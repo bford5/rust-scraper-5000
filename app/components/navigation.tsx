@@ -6,6 +6,8 @@ import { Session } from "next-auth"
 import {signIn} from "next-auth/react"
 import {signOut} from "next-auth/react"
 
+import {AnimatePresence, motion} from 'framer-motion'
+
 import {FaShoppingCart} from "react-icons/fa"
 import {DiRust} from "react-icons/di"
 
@@ -29,10 +31,19 @@ export default function Navigation({user}: Session) {
             <div className="cart my-auto">
                 <div onClick={cartStore.toggleCart} className="p-4 bg-teal-500 text-white rounded-md hover:bg-teal-700 hover:text-slate-300 transition text-xl cursor-pointer relative">
                     <FaShoppingCart />
-                    {cartStore.cart.length >= 0 && <span className=" absolute text-sm bg-red-500 text-white rounded-full px-0.5 py-0.5 top-0 right-0 flex justify-center">{cartStore.cart.length}</span>}
+                    <AnimatePresence>
+                    {cartStore.cart.length > 0 && (
+                        <motion.span animate={{scale: 1}} initial={{scale: 0}} exit={{scale: 0}} className=" absolute text-sm bg-red-500 text-white rounded-full px-0.5 py-0.5 top-0 right-0 flex justify-center">
+                            {cartStore.cart.length}
+                        </motion.span>
+                    )}
+                    </AnimatePresence>
                 </div>
             </div>
-            {cartStore.isOpen && <Cart />}
+            <AnimatePresence>
+                {/* the "motion." JSX preface is on the parent div rendered by Cart component */}
+                {cartStore.isOpen && <Cart />}
+            </AnimatePresence>
         </nav>
     )
 }
