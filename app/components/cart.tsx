@@ -8,12 +8,27 @@ import { IoChevronDownCircleSharp } from "react-icons/io5"
 import formatPrice from "@/utils/PriceFormatter";
 
 import { useCartStore } from "@/Store/store"
+import { format } from "path";
 
 // NOTE: transition class is custom using tailwind utility classes, setup in global.css w/ @apply
+
+function NoCartItems() {
+    return (
+        <div className="px-2 py-1 bg-sky-700 rounded-lg">
+            <p className="text-center text-lg italic text-white">No items in cart...</p>
+        </div>
+    )
+}
+
 
 export default function Cart() {
 
     const cartStore = useCartStore();
+
+    // total cart price
+    const totalCartPRice = cartStore.cart.reduce((accu, item) => {
+        return accu + item.unit_amount * item.quantity
+    }, 0)
 
     const CartItemsList = ({cart}: any) => {
         // const {id, name, quantity, unit_amount, description} = cart
@@ -46,11 +61,15 @@ export default function Cart() {
 
     return (
         <div onClick={() => {cartStore.toggleCart()}} className=" fixed w-full h-screen left-0 top-o bg-black/25">
-            {/* in order to stop cart closing when user interacts with cart modal below, add an onClick to stop propogation */}
-            <div onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 w-1/4 h-screen py-12 px-8 overflow-y-scroll text-gray-700 flex flex-col gap-2">
+            {/* in order to stop cart closing when user interacts with cart modal below, add an onClick to stop propogation of general click event above */}
+            <div onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 w-2/3 sm:w-1/2 md:w-1/3 lg:w-1/4 h-screen py-12 px-8 overflow-y-scroll text-gray-700 flex flex-col gap-2">
                 <h2 className=" underline text-lg">CART MODAL</h2>
-                {cartStore.cart.length > 0 ? <CartItemsList cart={cartStore.cart} /> : 'No items in cart...'}
-                <button className=" w-full mx-2 rounded-xl text-lg bg-black text-white">Checkout</button>
+                {cartStore.cart.length > 0 ? (
+                    <>
+                        <CartItemsList cart={cartStore.cart} />
+                        <button className=" w-full mx-2 my-1 rounded-xl text-lg bg-black text-white">Checkout for {`${formatPrice(totalCartPRice)}`}</button>
+                    </>
+                ) : <NoCartItems />}
             </div>
         </div>
     )

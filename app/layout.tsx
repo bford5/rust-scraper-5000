@@ -3,9 +3,20 @@ import './globals.css'
 import {getServerSession} from 'next-auth/next'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
+import { Ubuntu } from 'next/font/google'
+
 import Hydrate from '@/utils/Hydrate'
 
 import Navigation from './components/navigation'
+
+// ----xxxx----
+
+const ubuntu = Ubuntu({
+  weight: ['300', '400', '500', '700'],
+  subsets: ['latin'],
+
+
+})
 
 export const metadata = {
   title: 'rust scraper project',
@@ -22,7 +33,7 @@ export default async function RootLayout({
   // console.log(session);
   return (
     <html lang="en">
-      <body>
+      <body className={`${ubuntu.className}`}>
         <Hydrate>
           {/* having ? on session below stops trying to access .user IF session returns null */}
           <Navigation user={session?.user} expires={session?.expires as string}/>
