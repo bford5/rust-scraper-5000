@@ -108,3 +108,7 @@ a {
 .transition {
   @apply ease-in-out duration-300;
 }
+
+svg {
+  display: inherit !important;
+}

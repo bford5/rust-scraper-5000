@@ -19,8 +19,13 @@ import { useCartStore } from "@/Store/store"
 export default function Navigation({user}: Session) {
     const cartStore = useCartStore();
     return (
-        <nav className=" mx-5 bg-slate-500 mt-1 rounded-md px-2 flex justify-between gap-3">
-            <div className="logo"><Link href={`/`} className="inline-block align-middle"><span className=" text-2xl"><DiRust /></span><span className=" text-lg">Buster</span></Link></div>
+        <nav className=" mx-5 bg-slate-600 mt-1 rounded-md px-2 flex justify-between gap-3">
+            <div className="logo text-center">
+                <Link href={`/`} className="">
+                    <span className=" text-3xl text-amber-700"><DiRust /> <span className="text-white text-base">Buster</span></span>
+                    {/* <span className=" text-lg">Buster</span> */}
+                </Link>
+            </div>
             <div className="menu flex flex-row gap-1 py-3 ml-auto mr-0">
                 <Link className="p-2 hover:text-slate-800 hover:underline ease-in-out duration-700 transition-all" href={`/`}>Homepage</Link>
                 <Link className="p-2 hover:text-slate-800 hover:underline ease-in-out duration-700 transition-all" href={`/about`}>About</Link>

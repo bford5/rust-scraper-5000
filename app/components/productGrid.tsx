@@ -1,6 +1,6 @@
-export default function ProductGrid({children}) {
+export default function ProductGrid({children}: any) {
     return (
-        <div className=" grid grid-cols-fluid gap-4 mx-16 mt-3">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mx-16 mt-3">
             {children}
         </div>
     )

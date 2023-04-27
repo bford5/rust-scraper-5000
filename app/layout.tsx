@@ -8,6 +8,7 @@ import { Ubuntu } from 'next/font/google'
 import Hydrate from '@/utils/Hydrate'
 
 import Navigation from './components/navigation'
+import Footer from './components/footer'
 
 // ----xxxx----
 
@@ -37,7 +38,8 @@ export default async function RootLayout({
         <Hydrate>
           {/* having ? on session below stops trying to access .user IF session returns null */}
           <Navigation user={session?.user} expires={session?.expires as string}/>
-          {children}
+          <main>{children}</main>
+          <Footer/>
         </Hydrate>
       </body>
     </html>

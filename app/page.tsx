@@ -34,10 +34,15 @@ export default async function Home() {
 
   const products = await getProducts();
   // console.log(products);
+
+  const sortedProducts = products.sort((a, b) => a.unit_amount! - b.unit_amount!);
+
   return (
-    <main>
-      <p className="">Home Page</p>
-      <ProductGrid>{products.map((product) => <Product {...product} key={product.id} />)}</ProductGrid>
-    </main>
+    <section className="pb-10">
+      <div className=" w-1/2 underline mx-auto"><p className="text-center text-2xl pb-2 mt-2">Home Page</p></div>
+      <ProductGrid>{sortedProducts.map((product) => <Product {...product} key={product.id} />)}</ProductGrid>
+    </section>
   )
 }
+
+
